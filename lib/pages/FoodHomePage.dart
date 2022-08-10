@@ -27,7 +27,17 @@ class FoodHomePage extends StatelessWidget {
 
               if (state is FoodHomeLoadingState) {
                 return Center(
-                  child: CircularProgressIndicator(),
+                  child: Column(
+                    children: [
+                      CircularProgressIndicator(),
+                      ElevatedButton(
+                          onPressed: () {
+                            BlocProvider.of<FoodHomeBloc>(context).add(LoadApiEvent());
+                          },
+                          child: Text('LOAD AGAIN')
+                      )
+                    ],
+                  ),
                 );
               }
 
@@ -35,7 +45,13 @@ class FoodHomePage extends StatelessWidget {
                 return Column(
                   children: [
                     Text(state.strCategory),
-                    Text(state.strCategoryThumb)
+                    Text(state.strCategoryThumb),
+                    ElevatedButton(
+                        onPressed: () {
+                          BlocProvider.of<FoodHomeBloc>(context).add(LoadApiEvent());
+                        }, 
+                        child: Text('LOAD AGAIN')
+                    )
                   ],
                 );
               }

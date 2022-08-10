@@ -14,11 +14,11 @@ class FoodHomeBloc extends Bloc<FoodHomeEvent, FoodHomeState> {
   FoodHomeBloc(this._foodCategoryService) : super(FoodHomeLoadingState()) {
     on<LoadApiEvent>((event, emit) async {
       print('Loading Api Event...');
+      emit(FoodHomeLoadingState());
 
-      final fc = await _foodCategoryService.getFoodCategory();
-      print(fc);
+      FoodCategory fc = await _foodCategoryService.getFoodCategory();
 
-      emit(FoodHomeLoadedState(fc["strCategory"], fc["strCategoryThumb"]));
+      emit(FoodHomeLoadedState(fc.strCategory, fc.strCategoryThumb));
 
     });
   }

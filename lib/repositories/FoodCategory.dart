@@ -36,6 +36,35 @@ class FoodCategory {
     "strCategoryThumb": strCategoryThumb,
     "strCategoryDescription": strCategoryDescription,
   };
+
+  @override
+  String toString() {
+    return 'FoodCategory{idCategory: $idCategory, strCategory: $strCategory, strCategoryThumb: $strCategoryThumb, strCategoryDescription: $strCategoryDescription}';
+  }
+}
+
+FoodCategoryList foodCategoryListFromJson(String str) => FoodCategoryList.fromJson(json.decode(str));
+
+String foodCategoryListToJson(FoodCategoryList data) => json.encode(data.toJson());
+
+class FoodCategoryList {
+  FoodCategoryList({
+    required this.categories,
+  });
+
+  List<FoodCategory> categories;
+
+  factory FoodCategoryList.fromJson(Map<String, dynamic> json) => FoodCategoryList(
+    categories: List<FoodCategory>.from(json["categories"].map((x) => FoodCategory.fromJson(x))),
+  );
+
+  Map<String, dynamic> toJson() => {
+    "categories": List<dynamic>.from(categories.map((x) => x.toJson())),
+  };
+
+  FoodCategory getFirstCategory () {
+    return categories[0];
+  }
 }
 
 class FoodCategoryService {
@@ -46,10 +75,15 @@ class FoodCategoryService {
   //   return category;
   // }
 
-  dynamic getFoodCategory () async {
+  Future<FoodCategory>  getFoodCategory () async {
     final response = await get(Uri.parse('https://www.themealdb.com/api/json/v1/1/categories.php'));
-    final jsonBody = jsonDecode(response.body);
-    final category = jsonBody["categories"][0];
-    return category;
+
+    FoodCategoryList list = foodCategoryListFromJson(response.body);
+
+    print('Got list..');
+    FoodCategory first = list.getFirstCategory();
+    print(first.strCategory);
+
+    return first;
   }
 }
