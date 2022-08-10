@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_food_delivery/pages/FoodHomeBloc/food_home_bloc.dart';
 
 import '../components/AppNavBar.dart';
 import '../components/AppScaffold.dart';
 import 'dart:math';
+
+import '../repositories/FoodCategory.dart';
+import 'FoodHomePage.dart';
 
 
 class MenuPage extends StatefulWidget {
@@ -26,11 +31,18 @@ class _MenuPageState extends State<MenuPage> {
   }
 
 
-  void goToHomePage (int OPTION) {
-    // Navigator.push(
-    //     context,
-    //     MaterialPageRoute(builder: (context) => EditTodoPage(id: todo.id!, todoItem: todo))
-    // );
+  void goToFoodHomePage () {
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (_) => MultiRepositoryProvider(
+              providers: [
+                RepositoryProvider(create: (context) => FoodCategoryService()),
+              ],
+              child: FoodHomePage(),
+            ),
+        )
+    );
   }
 
   @override
@@ -68,7 +80,7 @@ class _MenuPageState extends State<MenuPage> {
                       label: 'Food',
                       sublabel: '${Random().nextInt(120).toString()} items',
                       onTap: () {
-                        goToHomePage(FOOD_OPTION);
+                        goToFoodHomePage();
                       },
                     ),
 
@@ -90,7 +102,7 @@ class _MenuPageState extends State<MenuPage> {
                       label: 'Beverage',
                       sublabel: '${Random().nextInt(120).toString()} items',
                       onTap: () {
-                        goToHomePage(BEVERAGE_OPTION);
+
                       },
                     ),
                   ],
