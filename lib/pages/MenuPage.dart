@@ -5,25 +5,28 @@ import '../components/AppScaffold.dart';
 import 'dart:math';
 
 
-class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+class MenuPage extends StatefulWidget {
+  const MenuPage({Key? key}) : super(key: key);
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<MenuPage> createState() => _MenuPageState();
 }
 
-class _HomePageState extends State<HomePage> {
-  Future<void> initHomePage() async {
+class _MenuPageState extends State<MenuPage> {
+  int FOOD_OPTION = 1;
+  int BEVERAGE_OPTION = 2;
+
+  Future<void> initMenuPage() async {
   }
 
   @override
   void initState() {
     super.initState();
-    initHomePage();
+    initMenuPage();
   }
 
 
-  void goToFoodPage () {
+  void goToHomePage (int OPTION) {
     // Navigator.push(
     //     context,
     //     MaterialPageRoute(builder: (context) => EditTodoPage(id: todo.id!, todoItem: todo))
@@ -64,6 +67,9 @@ class _HomePageState extends State<HomePage> {
                       ),
                       label: 'Food',
                       sublabel: '${Random().nextInt(120).toString()} items',
+                      onTap: () {
+                        goToHomePage(FOOD_OPTION);
+                      },
                     ),
 
                     SizedBox(height: 30),
@@ -83,6 +89,9 @@ class _HomePageState extends State<HomePage> {
                       ),
                       label: 'Beverage',
                       sublabel: '${Random().nextInt(120).toString()} items',
+                      onTap: () {
+                        goToHomePage(BEVERAGE_OPTION);
+                      },
                     ),
                   ],
                 ),
@@ -100,70 +109,74 @@ class MenuButton extends StatelessWidget {
   final Widget imageIcon;
   final String label;
   final String sublabel;
+  final Function onTap;
 
   const MenuButton({
-    Key? key, required this.imageIcon, required this.label, required this.sublabel,
+    Key? key, required this.imageIcon, required this.label, required this.sublabel, required this.onTap
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        Row(
-          children: [
-            SizedBox(height: 50, width: 50),
-            Expanded(
-              child: Container(
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.only(
-                    topRight: Radius.circular(10.0),
-                    bottomRight: Radius.circular(10.0),
-                    topLeft:  Radius.circular(30.0),
-                    bottomLeft:  Radius.circular(30.0),
-                  ),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey.withOpacity(0.5),
-                      spreadRadius: 5,
-                      blurRadius: 7,
-                      offset: Offset(0, 3), // changes position of shadow
+    return InkWell(
+      onTap: () {onTap();},
+      child: Stack(
+        children: [
+          Row(
+            children: [
+              SizedBox(height: 50, width: 50),
+              Expanded(
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.only(
+                      topRight: Radius.circular(10.0),
+                      bottomRight: Radius.circular(10.0),
+                      topLeft:  Radius.circular(30.0),
+                      bottomLeft:  Radius.circular(30.0),
                     ),
-                  ],
-                ),
-                height: 80,
-                child: Row(
-                  children: [
-                    SizedBox(width: 50),
-                    Container(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(label, style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-                          Text(sublabel, style: TextStyle(fontSize: 11, color: Colors.grey)),
-                        ],
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.5),
+                        spreadRadius: 5,
+                        blurRadius: 7,
+                        offset: Offset(0, 3), // changes position of shadow
                       ),
-                    )
-                  ],
+                    ],
+                  ),
+                  height: 80,
+                  child: Row(
+                    children: [
+                      SizedBox(width: 50),
+                      Container(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(label, style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                            Text(sublabel, style: TextStyle(fontSize: 11, color: Colors.grey)),
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
                 ),
               ),
-            ),
-            SizedBox(height: 50, width: 50),
-          ],
-        ),
-        Positioned(
-            top: 13,
-            left: 25,
-            child: imageIcon
-        ),
-        Positioned(
-            top: 25,
-            right: 35,
-            child: ChevronIcon()
-        ),
-      ],
+              SizedBox(height: 50, width: 50),
+            ],
+          ),
+          Positioned(
+              top: 13,
+              left: 25,
+              child: imageIcon
+          ),
+          Positioned(
+              top: 25,
+              right: 35,
+              child: ChevronIcon()
+          ),
+        ],
 
+      ),
     );
   }
 }
