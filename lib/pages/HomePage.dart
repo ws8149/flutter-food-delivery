@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../components/AppNavBar.dart';
 import '../components/AppScaffold.dart';
+import 'dart:math';
 
 
 class HomePage extends StatefulWidget {
@@ -49,67 +50,40 @@ class _HomePageState extends State<HomePage> {
                 Column(
                   children: [
                     SizedBox(height: 30),
-                    Stack(
-                      children: [
-                        Row(
-                          children: [
-                            SizedBox(height: 50, width: 50),
-                            Expanded(
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.only(
-                                    topRight: Radius.circular(10.0),
-                                    bottomRight: Radius.circular(10.0),
-                                    topLeft:  Radius.circular(30.0),
-                                    bottomLeft:  Radius.circular(30.0),
-                                  ),
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Colors.grey.withOpacity(0.5),
-                                      spreadRadius: 5,
-                                      blurRadius: 7,
-                                      offset: Offset(0, 3), // changes position of shadow
-                                    ),
-                                  ],
-                                ),
-                                height: 80,
-                                child: Row(
-                                  children: [
-                                    SizedBox(width: 50),
-                                    Container(
-                                      child: Column(
-                                        mainAxisAlignment: MainAxisAlignment.center,
-                                        children: [
-                                          Text('Food', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-                                          Text('120 items', style: TextStyle(fontSize: 11, color: Colors.grey)),
-                                        ],
-                                      ),
-                                    )
-                                  ],
-                                ),
-                              ),
-                            ),
-                            SizedBox(height: 50, width: 50),
-                          ],
-                        ),
-                        Positioned(
-                            top: 13,
-                            left: 25,
-                            child: ImageIcon(
-                                image: Image(image: AssetImage('lib/assets/food.jpg')),
-                                radius: 30
-                            )
-                        ),
-                        Positioned(
-                            top: 25,
-                            right: 35,
-                            child: ChevronIcon()
-                        ),
-                      ],
 
+                    MenuButton(
+                      imageIcon: Material(
+                        borderRadius: BorderRadius.circular(30),
+                        elevation: 2,
+                        child: CircleAvatar(
+                            radius: 30,
+                            child: ClipOval(
+                              child: Image(image: AssetImage('lib/assets/food.jpg'))
+                            ),
+                        ),
+                      ),
+                      label: 'Food',
+                      sublabel: '${Random().nextInt(120).toString()} items',
                     ),
 
+                    SizedBox(height: 30),
+
+                    MenuButton(
+                      imageIcon: Material(
+                        borderRadius: BorderRadius.circular(20),
+                        elevation: 2,
+                        child: ClipRRect(
+                            borderRadius: BorderRadius.circular(20.0),
+                            child: Image(
+                              image: AssetImage('lib/assets/beverage.jpg'),
+                              width: 60,
+                              height: 60,
+                            )
+                        ),
+                      ),
+                      label: 'Beverage',
+                      sublabel: '${Random().nextInt(120).toString()} items',
+                    ),
                   ],
                 ),
               ],
@@ -117,6 +91,78 @@ class _HomePageState extends State<HomePage> {
           ),
         ],
       ),
+
+    );
+  }
+}
+
+class MenuButton extends StatelessWidget {
+  final Widget imageIcon;
+  final String label;
+  final String sublabel;
+
+  const MenuButton({
+    Key? key, required this.imageIcon, required this.label, required this.sublabel,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      children: [
+        Row(
+          children: [
+            SizedBox(height: 50, width: 50),
+            Expanded(
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.only(
+                    topRight: Radius.circular(10.0),
+                    bottomRight: Radius.circular(10.0),
+                    topLeft:  Radius.circular(30.0),
+                    bottomLeft:  Radius.circular(30.0),
+                  ),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.5),
+                      spreadRadius: 5,
+                      blurRadius: 7,
+                      offset: Offset(0, 3), // changes position of shadow
+                    ),
+                  ],
+                ),
+                height: 80,
+                child: Row(
+                  children: [
+                    SizedBox(width: 50),
+                    Container(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(label, style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                          Text(sublabel, style: TextStyle(fontSize: 11, color: Colors.grey)),
+                        ],
+                      ),
+                    )
+                  ],
+                ),
+              ),
+            ),
+            SizedBox(height: 50, width: 50),
+          ],
+        ),
+        Positioned(
+            top: 13,
+            left: 25,
+            child: imageIcon
+        ),
+        Positioned(
+            top: 25,
+            right: 35,
+            child: ChevronIcon()
+        ),
+      ],
 
     );
   }
@@ -146,31 +192,6 @@ class ChevronIcon extends StatelessWidget {
         width: 30,
         child: Icon(Icons.chevron_right, color: Colors.red.shade800),
 
-    );
-  }
-}
-
-class ImageIcon extends StatelessWidget {
-  final Image image;
-  final double radius;
-
-  const ImageIcon({
-    Key? key,
-    required this.image,
-    required this.radius,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Material(
-      borderRadius: BorderRadius.circular(radius),
-      elevation: 2,
-      child: CircleAvatar(
-        radius: radius,
-        child: ClipOval(
-          child: image,
-        )
-      ),
     );
   }
 }
