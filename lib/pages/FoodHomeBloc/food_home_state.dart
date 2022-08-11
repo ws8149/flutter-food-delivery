@@ -10,13 +10,12 @@ class FoodHomeLoadingState extends FoodHomeState {
 }
 
 class FoodHomeLoadedState extends FoodHomeState {
-  final String strCategory;
-  final String strCategoryThumb;
+  final FoodCategoryList foodCategoryList;
 
-  FoodHomeLoadedState(this.strCategory, this.strCategoryThumb);
+  FoodHomeLoadedState(this.foodCategoryList);
 
   @override
-  List<Object?> get props => [this.strCategory, this.strCategoryThumb];
+  List<Object?> get props => [this.foodCategoryList];
 
 
 }

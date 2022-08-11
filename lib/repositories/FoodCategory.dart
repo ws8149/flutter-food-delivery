@@ -62,9 +62,12 @@ class FoodCategoryList {
     "categories": List<dynamic>.from(categories.map((x) => x.toJson())),
   };
 
-  FoodCategory getFirstCategory () {
-    return categories[0];
-  }
+  @override
+  FoodCategory operator [](int index) => categories[index];
+
+  @override
+  int get length => categories.length;
+
 }
 
 class FoodCategoryService {
@@ -75,15 +78,11 @@ class FoodCategoryService {
   //   return category;
   // }
 
-  Future<FoodCategory>  getFoodCategory () async {
+  Future<FoodCategoryList>  getFoodCategory () async {
     final response = await get(Uri.parse('https://www.themealdb.com/api/json/v1/1/categories.php'));
 
     FoodCategoryList list = foodCategoryListFromJson(response.body);
 
-    print('Got list..');
-    FoodCategory first = list.getFirstCategory();
-    print(first.strCategory);
-
-    return first;
+    return list;
   }
 }

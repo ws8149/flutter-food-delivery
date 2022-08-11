@@ -16,9 +16,9 @@ class FoodHomeBloc extends Bloc<FoodHomeEvent, FoodHomeState> {
       print('Loading Api Event...');
       emit(FoodHomeLoadingState());
 
-      FoodCategory fc = await _foodCategoryService.getFoodCategory();
+      FoodCategoryList list = await _foodCategoryService.getFoodCategory();
 
-      emit(FoodHomeLoadedState(fc.strCategory, fc.strCategoryThumb));
+      emit(FoodHomeLoadedState(list));
 
     });
   }

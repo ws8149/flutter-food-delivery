@@ -6,6 +6,7 @@ import '../components/AppNavBar.dart';
 import '../components/AppScaffold.dart';
 import 'dart:math';
 
+import '../components/SearchBar.dart';
 import '../repositories/FoodCategory.dart';
 import 'FoodHomePage.dart';
 
@@ -56,7 +57,10 @@ class _MenuPageState extends State<MenuPage> {
       ),
       body: Column(
         children: [
-          SearchBar(),
+          Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: SearchBar(),
+          ),
           Flexible(
             flex: 1,
             child: Stack(
@@ -240,34 +244,6 @@ class BackgroundBar extends StatelessWidget {
         ),
         width: 80,
         height: MediaQuery.of(context).size.height * 0.6,
-      ),
-    );
-  }
-}
-
-class SearchBar extends StatelessWidget {
-  const SearchBar({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(20.0),
-      child: Container(
-        child: TextField(
-          decoration:InputDecoration(
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(20),
-              borderSide: BorderSide.none
-            ),
-            fillColor: Colors.grey.shade200,
-            filled: true,
-            labelText: 'Search Food',
-            floatingLabelBehavior: FloatingLabelBehavior.never,
-            prefixIcon: Icon(Icons.search)
-          ),
-        ),
       ),
     );
   }
