@@ -3,9 +3,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_food_delivery/components/AppScaffold.dart';
 import 'package:flutter_food_delivery/components/SearchBar.dart';
 import 'package:flutter_food_delivery/pages/FoodHomeBloc/food_home_bloc.dart';
+import 'package:flutter_food_delivery/repositories/ApiService.dart';
 import 'package:flutter_food_delivery/repositories/FoodCategory.dart';
 
 import '../components/AppNavBar.dart';
+import '../repositories/Food.dart';
 
 class FoodHomePage extends StatelessWidget {
   const FoodHomePage({Key? key}) : super(key: key);
@@ -14,7 +16,7 @@ class FoodHomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => FoodHomeBloc(
-          RepositoryProvider.of<FoodCategoryService>(context)
+          RepositoryProvider.of<ApiService>(context),
       )..add(LoadApiEvent()),
       child: AppScaffold(
         appBar: AppNavBar(
@@ -75,6 +77,7 @@ class LoadedPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -163,11 +166,43 @@ class LoadedPage extends StatelessWidget {
 
           SizedBox(height: 20),
 
-          PopularCard(),
-          SizedBox(height: 20),
-          PopularCard(),
-          SizedBox(height: 20),
-          PopularCard(),
+          // ListView.builder(
+          //   padding: EdgeInsets.only(left: 10, right: 10),
+          //   itemCount: state.foodList.length,
+          //   itemBuilder: (_, index) {
+          //     Food food = state.foodList[index];
+          //
+          //     return Padding(
+          //       padding: const EdgeInsets.all(8),
+          //       child: Container(
+          //         height: 100,
+          //         width: 100,
+          //         child: Column(
+          //           children: [
+          //             SizedBox(height: 10),
+          //
+          //             ClipRRect(
+          //                 borderRadius: BorderRadius.circular(10.0),
+          //                 child: Image.network(
+          //                     food.strMealThumb
+          //                 )
+          //             ),
+          //
+          //             SizedBox(height: 10),
+          //
+          //             Text(
+          //               food.strMeal,
+          //               style: TextStyle(
+          //                 fontWeight: FontWeight.bold,
+          //                 overflow: TextOverflow.ellipsis,
+          //               ),
+          //             ),
+          //           ],
+          //         ),
+          //       ),
+          //     );
+          //   },
+          // ),
 
           ElevatedButton(
               onPressed: () {
