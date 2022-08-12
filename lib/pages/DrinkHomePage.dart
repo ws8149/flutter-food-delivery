@@ -2,19 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_food_delivery/components/AppScaffold.dart';
 import 'package:flutter_food_delivery/components/SearchBar.dart';
-import 'package:flutter_food_delivery/pages/FoodHomeBloc/food_home_bloc.dart';
-import 'package:flutter_food_delivery/repositories/FoodCategory.dart';
+import 'package:flutter_food_delivery/pages/DrinkHomeBloc/drink_home_bloc.dart';
+import 'package:flutter_food_delivery/repositories/DrinkCategory.dart';
 
 import '../components/AppNavBar.dart';
+import '../repositories/DrinkCategory.dart';
 
-class FoodHomePage extends StatelessWidget {
-  const FoodHomePage({Key? key}) : super(key: key);
+class DrinkHomePage extends StatelessWidget {
+  const DrinkHomePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => FoodHomeBloc(
-          RepositoryProvider.of<FoodCategoryService>(context)
+      create: (context) => DrinkHomeBloc(
+          RepositoryProvider.of<DrinkCategoryService>(context)
       )..add(LoadApiEvent()),
       child: AppScaffold(
         appBar: AppNavBar(
@@ -23,14 +24,14 @@ class FoodHomePage extends StatelessWidget {
             child: Icon(Icons.shopping_cart),
           ),
         ),
-        body: BlocBuilder<FoodHomeBloc, FoodHomeState>(
+        body: BlocBuilder<DrinkHomeBloc, DrinkHomeState>(
             builder: (context, state) {
 
-              if (state is FoodHomeLoadingState) {
+              if (state is DrinkHomeLoadingState) {
                 return LoadingSpinner();
               }
 
-              if (state is FoodHomeLoadedState) {
+              if (state is DrinkHomeLoadedState) {
                 return LoadedPage(state: state);
               }
 
@@ -55,7 +56,7 @@ class LoadingSpinner extends StatelessWidget {
           CircularProgressIndicator(),
           ElevatedButton(
               onPressed: () {
-                BlocProvider.of<FoodHomeBloc>(context).add(LoadApiEvent());
+                BlocProvider.of<DrinkHomeBloc>(context).add(LoadApiEvent());
               },
               child: Text('LOAD AGAIN')
           )
@@ -66,7 +67,7 @@ class LoadingSpinner extends StatelessWidget {
 }
 
 class LoadedPage extends StatelessWidget {
-  final FoodHomeLoadedState state;
+  final DrinkHomeLoadedState state;
 
   const LoadedPage({
     Key? key,
@@ -109,17 +110,17 @@ class LoadedPage extends StatelessWidget {
 
           Padding(
             padding: const EdgeInsets.only(left:25 , right: 25),
-            child: SearchBar(label: 'Search Food'),
+            child: SearchBar(label: 'Search Drink'),
           ),
 
           Container(
             height: 120,
             child: ListView.builder(
               padding: EdgeInsets.only(left: 10, right: 10),
-              itemCount: state.foodCategoryList.length,
+              itemCount: state.drinkCategoryList.length,
               scrollDirection: Axis.horizontal,
               itemBuilder: (_, index) {
-                FoodCategory category = state.foodCategoryList[index];
+                DrinkCategory category = state.drinkCategoryList[index];
 
                 return Padding(
                   padding: const EdgeInsets.all(8),
@@ -132,9 +133,11 @@ class LoadedPage extends StatelessWidget {
 
                         ClipRRect(
                             borderRadius: BorderRadius.circular(10.0),
-                            child: Image.network(
-                                category.strCategoryThumb
-                            )
+                            child: Image(
+                              height: 60,
+                              width: 60,
+                              image: AssetImage('lib/assets/beverage.jpg'),
+                            ),
                         ),
 
                         SizedBox(height: 10),
@@ -158,7 +161,7 @@ class LoadedPage extends StatelessWidget {
 
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Text('Popular Food', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24)),
+            child: Text('Popular Drink', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24)),
           ),
 
           SizedBox(height: 20),
@@ -171,7 +174,7 @@ class LoadedPage extends StatelessWidget {
 
           ElevatedButton(
               onPressed: () {
-                BlocProvider.of<FoodHomeBloc>(context).add(LoadApiEvent());
+                BlocProvider.of<DrinkHomeBloc>(context).add(LoadApiEvent());
               },
               child: Text('LOAD AGAIN')
           )
@@ -211,7 +214,7 @@ class PopularCard extends StatelessWidget {
                   SizedBox(width: 5),
                   Icon(Icons.circle, color: Colors.red.shade800, size: 4),
                   SizedBox(width: 5),
-                  Text('Western Food', style: TextStyle(color: Colors.grey)),
+                  Text('Western Drink', style: TextStyle(color: Colors.grey)),
                 ],
               )
             ],

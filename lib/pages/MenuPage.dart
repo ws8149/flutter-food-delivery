@@ -7,7 +7,9 @@ import '../components/AppScaffold.dart';
 import 'dart:math';
 
 import '../components/SearchBar.dart';
+import '../repositories/DrinkCategory.dart';
 import '../repositories/FoodCategory.dart';
+import 'DrinkHomePage.dart';
 import 'FoodHomePage.dart';
 
 
@@ -19,18 +21,6 @@ class MenuPage extends StatefulWidget {
 }
 
 class _MenuPageState extends State<MenuPage> {
-  int FOOD_OPTION = 1;
-  int BEVERAGE_OPTION = 2;
-
-  Future<void> initMenuPage() async {
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    initMenuPage();
-  }
-
 
   void goToFoodHomePage () {
     Navigator.push(
@@ -42,6 +32,20 @@ class _MenuPageState extends State<MenuPage> {
               ],
               child: FoodHomePage(),
             ),
+        )
+    );
+  }
+
+  void goToDrinkHomePage () {
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (_) => MultiRepositoryProvider(
+            providers: [
+              RepositoryProvider(create: (context) => DrinkCategoryService()),
+            ],
+            child: DrinkHomePage(),
+          ),
         )
     );
   }
@@ -59,7 +63,7 @@ class _MenuPageState extends State<MenuPage> {
         children: [
           Padding(
             padding: const EdgeInsets.all(20.0),
-            child: SearchBar(),
+            child: SearchBar(label: 'Search Food'),
           ),
           Flexible(
             flex: 1,
@@ -106,7 +110,7 @@ class _MenuPageState extends State<MenuPage> {
                       label: 'Beverage',
                       sublabel: '${Random().nextInt(120).toString()} items',
                       onTap: () {
-
+                        goToDrinkHomePage();
                       },
                     ),
                   ],

@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 
 class SearchBar extends StatelessWidget {
+  final String label;
 
   const SearchBar({
     Key? key,
+    required this.label,
   }) : super(key: key);
 
   @override
@@ -17,7 +19,7 @@ class SearchBar extends StatelessWidget {
             ),
             fillColor: Colors.grey.shade200,
             filled: true,
-            labelText: 'Search Food',
+            labelText: label,
             floatingLabelBehavior: FloatingLabelBehavior.never,
             prefixIcon: Icon(Icons.search)
         ),

@@ -71,12 +71,6 @@ class FoodCategoryList {
 }
 
 class FoodCategoryService {
-  // Future<FoodCategory> getFoodCategory () async {
-  //   final response = await get(Uri.parse('https://www.themealdb.com/api/json/v1/1/categories.php'));
-  //   final jsonBody = jsonDecode(response.body);
-  //   final category = foodCategoryFromJson(jsonBody["categories"][0]);
-  //   return category;
-  // }
 
   Future<FoodCategoryList>  getFoodCategory () async {
     final response = await get(Uri.parse('https://www.themealdb.com/api/json/v1/1/categories.php'));
