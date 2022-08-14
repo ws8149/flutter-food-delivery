@@ -4,8 +4,10 @@ import 'Food.dart';
 import 'FoodCategory.dart';
 
 class ApiService {
-  Future<FoodList>  getFoodList () async {
-    final response = await get(Uri.parse('https://www.themealdb.com/api/json/v1/1/filter.php?c=Beef'));
+  Future<FoodList>  getFoodList (String category) async {
+    final response = await get(Uri.parse('https://www.themealdb.com/api/json/v1/1/filter.php?c=${category}'));
+
+    print('api request str:https://www.themealdb.com/api/json/v1/1/filter.php?c=${category}');
 
     FoodList list = foodListFromJson(response.body);
 

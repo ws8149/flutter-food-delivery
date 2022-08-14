@@ -19,10 +19,25 @@ class FoodHomeBloc extends Bloc<FoodHomeEvent, FoodHomeState> {
       emit(FoodHomeLoadingState());
 
       FoodCategoryList categoryList = await _api.getFoodCategory();
-      FoodList foodList = await _api.getFoodList();
+
+      // Assign Beef by default
+      FoodList foodList = await _api.getFoodList('Beef');
 
       emit(FoodHomeLoadedState(categoryList, foodList));
 
+    });
+
+    on<SelectCategoryEvent>((event, emit) async {
+      print('Select Category Event...');
+
+      final currentState = state as FoodHomeLoadedState;
+      FoodCategoryList _foodCategoryList = currentState.foodCategoryList;
+
+      emit(FoodHomeLoadingState());
+
+      FoodList foodList = await _api.getFoodList(event.categoryText);
+
+      emit(FoodHomeLoadedState(_foodCategoryList, foodList));
     });
   }
 }

@@ -124,32 +124,41 @@ class LoadedPage extends StatelessWidget {
               itemBuilder: (_, index) {
                 FoodCategory category = state.foodCategoryList[index];
 
-                return Padding(
-                  padding: const EdgeInsets.all(8),
-                  child: Container(
-                    height: 100,
-                    width: 100,
-                    child: Column(
-                      children: [
-                        SizedBox(height: 10),
+                return InkWell(
+                  onTap: () {
+                    String categoryText = category.strCategory;
 
-                        ClipRRect(
-                            borderRadius: BorderRadius.circular(10.0),
-                            child: Image.network(
-                                category.strCategoryThumb
-                            )
-                        ),
+                    BlocProvider.of<FoodHomeBloc>(context).add(
+                      SelectCategoryEvent(categoryText)
+                    );
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.all(8),
+                    child: Container(
+                      height: 100,
+                      width: 100,
+                      child: Column(
+                        children: [
+                          SizedBox(height: 10),
 
-                        SizedBox(height: 10),
-
-                        Text(
-                          category.strCategory,
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            overflow: TextOverflow.ellipsis,
+                          ClipRRect(
+                              borderRadius: BorderRadius.circular(10.0),
+                              child: Image.network(
+                                  category.strCategoryThumb
+                              )
                           ),
-                        ),
-                      ],
+
+                          SizedBox(height: 10),
+
+                          Text(
+                            category.strCategory,
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 );
