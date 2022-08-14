@@ -4,6 +4,8 @@
 
 import 'dart:convert';
 
+import 'package:flutter/material.dart';
+import 'package:flutter/src/widgets/basic.dart';
 import 'package:http/http.dart';
 
 Food foodFromJson(String str) => Food.fromJson(json.decode(str));
@@ -64,4 +66,8 @@ class FoodList {
   @override
   int get length => meals.length;
 
+  @override
+  map(Container Function(Food food) f) {
+    return meals.map(f);
+  }
 }

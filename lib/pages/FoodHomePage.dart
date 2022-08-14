@@ -157,52 +157,74 @@ class LoadedPage extends StatelessWidget {
             ),
           ),
 
-          SizedBox(height: 20),
+          SizedBox(height: 10),
 
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Text('Popular Food', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24)),
           ),
 
-          SizedBox(height: 20),
+          Column(
+            children: state.foodList.map((food) {
+              return Container(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(height: 10),
 
-          // ListView.builder(
-          //   padding: EdgeInsets.only(left: 10, right: 10),
-          //   itemCount: state.foodList.length,
-          //   itemBuilder: (_, index) {
-          //     Food food = state.foodList[index];
-          //
-          //     return Padding(
-          //       padding: const EdgeInsets.all(8),
-          //       child: Container(
-          //         height: 100,
-          //         width: 100,
-          //         child: Column(
-          //           children: [
-          //             SizedBox(height: 10),
-          //
-          //             ClipRRect(
-          //                 borderRadius: BorderRadius.circular(10.0),
-          //                 child: Image.network(
-          //                     food.strMealThumb
-          //                 )
-          //             ),
-          //
-          //             SizedBox(height: 10),
-          //
-          //             Text(
-          //               food.strMeal,
-          //               style: TextStyle(
-          //                 fontWeight: FontWeight.bold,
-          //                 overflow: TextOverflow.ellipsis,
-          //               ),
-          //             ),
-          //           ],
-          //         ),
-          //       ),
-          //     );
-          //   },
-          // ),
+                    AspectRatio(
+                      aspectRatio: 1.5,
+                      child: Image.network(
+                        food.strMealThumb,
+                        fit: BoxFit.cover,
+                        alignment: FractionalOffset.topCenter,
+                      ),
+                    ),
+
+                    SizedBox(height: 10),
+
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+
+                        Padding(
+                          padding: const EdgeInsets.only(left: 8.0),
+                          child: Text(
+                            food.strMeal,
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          ),
+                        ),
+
+                        SizedBox(height: 5),
+
+                        Padding(
+                          padding: const EdgeInsets.only(left: 7.0),
+                          child: Row(
+                            children: [
+                              Icon(Icons.star, color: Colors.red.shade800, size: 14),
+                              Text('4.9', style: TextStyle(color: Colors.red.shade800)),
+                              SizedBox(width: 5),
+                              Text('(124 Ratings) Cafe', style: TextStyle(color: Colors.grey)),
+                              SizedBox(width: 5),
+                              Icon(Icons.circle, color: Colors.red.shade800, size: 4),
+                              SizedBox(width: 5),
+                              Text('Western Food', style: TextStyle(color: Colors.grey)),
+                            ],
+                          ),
+                        )
+
+
+
+                      ],
+                    ),
+                  ],
+                ),
+              );
+            }).toList(),
+          ),
 
           ElevatedButton(
               onPressed: () {
@@ -216,44 +238,3 @@ class LoadedPage extends StatelessWidget {
   }
 }
 
-class PopularCard extends StatelessWidget {
-  const PopularCard({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Image(
-          image: AssetImage('lib/assets/hardcoded.jpg'),
-          width: MediaQuery.of(context).size.width,
-        ),
-
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text('Hardcoded by Wilson', style: TextStyle(fontWeight: FontWeight.bold)),
-
-              Row(
-                children: [
-                  Icon(Icons.star, color: Colors.red.shade800),
-                  Text('4.9', style: TextStyle(color: Colors.red.shade800)),
-                  SizedBox(width: 5),
-                  Text('(124 Ratings) Cafe', style: TextStyle(color: Colors.grey)),
-                  SizedBox(width: 5),
-                  Icon(Icons.circle, color: Colors.red.shade800, size: 4),
-                  SizedBox(width: 5),
-                  Text('Western Food', style: TextStyle(color: Colors.grey)),
-                ],
-              )
-            ],
-          ),
-        )
-
-      ],
-    );
-  }
-}
