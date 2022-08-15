@@ -5,8 +5,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/basic.dart';
-import 'package:http/http.dart';
+
 
 Food foodFromJson(String str) => Food.fromJson(json.decode(str));
 

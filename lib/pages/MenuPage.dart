@@ -44,7 +44,7 @@ class _MenuPageState extends State<MenuPage> {
         MaterialPageRoute(
           builder: (_) => MultiRepositoryProvider(
             providers: [
-              RepositoryProvider(create: (context) => DrinkCategoryService()),
+              RepositoryProvider(create: (context) => ApiService()),
             ],
             child: DrinkHomePage(),
           ),

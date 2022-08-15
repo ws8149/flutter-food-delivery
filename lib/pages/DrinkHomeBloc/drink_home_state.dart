@@ -11,11 +11,12 @@ class DrinkHomeLoadingState extends DrinkHomeState {
 
 class DrinkHomeLoadedState extends DrinkHomeState {
   final DrinkCategoryList drinkCategoryList;
+  final DrinkList drinkList;
 
-  DrinkHomeLoadedState(this.drinkCategoryList);
+  DrinkHomeLoadedState(this.drinkCategoryList, this.drinkList);
 
   @override
-  List<Object?> get props => [this.drinkCategoryList];
+  List<Object?> get props => [this.drinkCategoryList, this.drinkList];
 
 
 }

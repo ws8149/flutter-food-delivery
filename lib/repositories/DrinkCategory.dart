@@ -58,13 +58,3 @@ class DrinkCategoryList {
   int get length => categories.length;
 
 }
-
-class DrinkCategoryService {
-  Future<DrinkCategoryList>  getDrinkCategory () async {
-    final response = await get(Uri.parse('https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list'));
-
-    DrinkCategoryList list = drinkCategoryListFromJson(response.body);
-
-    return list;
-  }
-}
