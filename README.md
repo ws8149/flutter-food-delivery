@@ -1,16 +1,20 @@
-# flutter_food_delivery
+# Flutter Recipe App 
 
-A new Flutter project.
+An assessment project for the demonstration of my technical knowledge of the Flutter framework. It also served as an opportunity for me to learn BLoC architecture as I had no knowledge of it prior to this project.
 
-## Getting Started
+## Project Description
+This Recipe app allows users to view recipes from MealDB. There is also a basic unit test included with this project.
 
-This project is a starting point for a Flutter application.
+The base logic of the application uses BloC to achieve separation of concerns. This app can be further improved by adding widget tests and a caching mechanism for API responses.
 
-A few resources to get you started if this is your first Flutter project:
+There was one area of concern which was the separation of DrinkHomePage and FoodHomePage. Initially, they both shared the same page but I found it to be cleaner once its separated. 
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## How to Run The Project
+1. Clone this repository and open the folder with Android Studio or any Flutter IDE of your choice.
+2. Ensure an ios / android device or simulator is installed on your PC.
+3. Run the app with the following command:
+   `flutter run`
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## How to Run The Tests
+1. Run the command below:
+   `flutter test unit_test.dart`
