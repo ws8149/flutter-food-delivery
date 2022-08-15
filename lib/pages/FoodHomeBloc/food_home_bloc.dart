@@ -40,4 +40,6 @@ class FoodHomeBloc extends Bloc<FoodHomeEvent, FoodHomeState> {
       emit(FoodHomeLoadedState(_foodCategoryList, foodList));
     });
   }
+
+  get initialState => this.state;
 }

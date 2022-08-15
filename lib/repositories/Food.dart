@@ -4,6 +4,7 @@
 
 import 'dart:convert';
 
+import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 
 
@@ -11,7 +12,7 @@ Food foodFromJson(String str) => Food.fromJson(json.decode(str));
 
 String foodToJson(Food data) => json.encode(data.toJson());
 
-class Food {
+class Food extends Equatable {
   Food({
     required this.idMeal,
     required this.strMeal,
@@ -38,13 +39,16 @@ class Food {
   String toString() {
     return 'Food{idMeal: $idMeal, strMeal: $strMeal, strMealThumb: $strMealThumb}';
   }
+
+  @override
+  List<Object?> get props => [idMeal, strMeal, strMealThumb];
 }
 
 FoodList foodListFromJson(String str) => FoodList.fromJson(json.decode(str));
 
 String foodListToJson(FoodList data) => json.encode(data.toJson());
 
-class FoodList {
+class FoodList extends Equatable {
   FoodList({
     required this.meals,
   });
@@ -69,4 +73,7 @@ class FoodList {
   map(Container Function(Food food) f) {
     return meals.map(f);
   }
+
+  @override
+  List<Object?> get props => [meals];
 }
