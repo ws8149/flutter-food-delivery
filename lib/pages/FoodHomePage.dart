@@ -6,6 +6,7 @@ import 'package:flutter_food_delivery/blocs/FoodHomeBloc/food_home_bloc.dart';
 import 'package:flutter_food_delivery/repositories/ApiService.dart';
 import 'package:flutter_food_delivery/repositories/models/FoodCategory.dart';
 
+import '../components/AppLoadingSpinner.dart';
 import '../components/AppNavBar.dart';
 import '../repositories/models/Food.dart';
 
@@ -29,7 +30,7 @@ class FoodHomePage extends StatelessWidget {
             builder: (context, state) {
 
               if (state is FoodHomeLoadingState) {
-                return LoadingSpinner();
+                return AppLoadingSpinner();
               }
 
               if (state is FoodHomeLoadedState) {
@@ -39,23 +40,6 @@ class FoodHomePage extends StatelessWidget {
               return Container();
           }
         ),
-      ),
-    );
-  }
-}
-
-class LoadingSpinner extends StatelessWidget {
-  const LoadingSpinner({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Flexible(
-        fit: FlexFit.loose,
-        flex: 1,
-        child: CircularProgressIndicator(),
       ),
     );
   }
