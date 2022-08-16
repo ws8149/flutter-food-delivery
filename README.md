@@ -1,9 +1,9 @@
-# Flutter Recipe App 
+# Flutter Food Delivery App 
 
 An assessment project for the demonstration of my technical knowledge of the Flutter framework. It also served as an opportunity for me to learn BLoC architecture as I had no knowledge of it prior to this project.
 
 ## Project Description
-This Recipe app allows users to view recipes from MealDB. There is also a basic unit test included with this project.
+This Recipe app allows users to view meals from MealDB. There is also a basic unit test included with this project.
 
 The base logic of the application uses BloC to achieve separation of concerns. This app can be further improved by adding widget tests and a caching mechanism for API responses.
 
