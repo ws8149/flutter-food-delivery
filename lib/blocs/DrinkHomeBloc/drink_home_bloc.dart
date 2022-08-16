@@ -4,8 +4,8 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 
 import '../../repositories/ApiService.dart';
-import '../../repositories/Drink.dart';
-import '../../repositories/DrinkCategory.dart';
+import '../../repositories/models/Drink.dart';
+import '../../repositories/models/DrinkCategory.dart';
 
 part 'drink_home_event.dart';
 part 'drink_home_state.dart';

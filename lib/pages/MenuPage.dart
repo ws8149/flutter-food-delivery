@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_food_delivery/pages/FoodHomeBloc/food_home_bloc.dart';
 import 'package:flutter_food_delivery/repositories/ApiService.dart';
 
 import '../components/AppNavBar.dart';
@@ -8,9 +7,6 @@ import '../components/AppScaffold.dart';
 import 'dart:math';
 
 import '../components/SearchBar.dart';
-import '../repositories/DrinkCategory.dart';
-import '../repositories/Food.dart';
-import '../repositories/FoodCategory.dart';
 import 'DrinkHomePage.dart';
 import 'FoodHomePage.dart';
 
@@ -112,7 +108,8 @@ class _MenuPageState extends State<MenuPage> {
                       label: 'Beverage',
                       sublabel: '${Random().nextInt(120).toString()} items',
                       onTap: () {
-                        goToDrinkHomePage();
+                        ApiService().getFoodDetail();
+                        // goToDrinkHomePage();
                       },
                     ),
                   ],

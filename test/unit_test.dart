@@ -1,9 +1,9 @@
 import 'dart:convert';
 
 import 'package:bloc_test/bloc_test.dart';
-import 'package:flutter_food_delivery/pages/FoodHomeBloc/food_home_bloc.dart';
-import 'package:flutter_food_delivery/repositories/Food.dart';
-import 'package:flutter_food_delivery/repositories/FoodCategory.dart';
+import 'package:flutter_food_delivery/blocs/FoodHomeBloc/food_home_bloc.dart';
+import 'package:flutter_food_delivery/repositories/models/Food.dart';
+import 'package:flutter_food_delivery/repositories/models/FoodCategory.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:flutter_food_delivery/repositories/ApiService.dart';

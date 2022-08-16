@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_food_delivery/components/AppScaffold.dart';
 import 'package:flutter_food_delivery/components/SearchBar.dart';
-import 'package:flutter_food_delivery/pages/DrinkHomeBloc/drink_home_bloc.dart';
+import 'package:flutter_food_delivery/blocs/DrinkHomeBloc/drink_home_bloc.dart';
 import 'package:flutter_food_delivery/repositories/ApiService.dart';
-import 'package:flutter_food_delivery/repositories/DrinkCategory.dart';
+import 'package:flutter_food_delivery/repositories/models/DrinkCategory.dart';
 
 import '../components/AppNavBar.dart';
-import '../repositories/Drink.dart';
+import '../repositories/models/Drink.dart';
 
 class DrinkHomePage extends StatelessWidget {
   const DrinkHomePage({Key? key}) : super(key: key);
@@ -52,16 +52,10 @@ class LoadingSpinner extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Column(
-        children: [
-          CircularProgressIndicator(),
-          ElevatedButton(
-              onPressed: () {
-                BlocProvider.of<DrinkHomeBloc>(context).add(LoadApiEvent());
-              },
-              child: Text('LOAD AGAIN')
-          )
-        ],
+      child: Flexible(
+        fit: FlexFit.loose,
+        flex: 1,
+        child: CircularProgressIndicator(),
       ),
     );
   }
