@@ -1,9 +1,10 @@
 import 'package:http/http.dart';
 
-import 'Drink.dart';
-import 'DrinkCategory.dart';
-import 'Food.dart';
-import 'FoodCategory.dart';
+import 'models/Drink.dart';
+import 'models/DrinkCategory.dart';
+import 'models/Food.dart';
+import 'models/FoodCategory.dart';
+import 'models/FoodDetail.dart';
 
 class ApiService {
   Future<FoodList>  getFoodList (String category) async {
@@ -22,6 +23,14 @@ class ApiService {
     return list;
   }
 
+  Future<FoodDetail>  getFoodDetail () async {
+    final response = await get(Uri.parse('https://www.themealdb.com/api/json/v1/1/search.php?s=Arrabiata'));
+
+    Meals meals = mealsFromJson(response.body);
+
+    return meals.getFoodDetail();
+  }
+
   Future<DrinkList>  getDrinkList (String category) async {
     final response = await get(Uri.parse('https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=${category}'));
 
@@ -37,5 +46,6 @@ class ApiService {
 
     return list;
   }
+
 
 }
